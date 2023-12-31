@@ -10,20 +10,9 @@ const app = express();
 
 connectDB();
 
-const whitelist = ["http://localhost:3000"];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-
 // middlewares
-app.use(cors(corsOptions));
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
